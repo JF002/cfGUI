@@ -8,7 +8,7 @@ extern const uint8_t image_data_wifi2[];
 extern const uint8_t image_data_wifi3[];
 
 void StatusBar::SetWifiStatus(const StatusBar::WifiStatuses status) {
-  if(wifiStatus != status){
+  if(wifiStatus != status) {
     wifiStatus = status;
     isUpdated = true;
   }
@@ -42,10 +42,7 @@ void StatusBar::Draw() {
 
     M5.Lcd.setTextDatum(TC_DATUM);
     M5.Lcd.drawString(dateTime.c_str(), 160, 5);
-/*
-    M5.Lcd.setTextDatum(TR_DATUM);
-    M5.Lcd.drawString("21C", 319, 5);
-    */
+
     const uint8_t* wifibmp = image_data_wifi0;
     switch(wifiStatus) {
       case WifiStatuses::Weak: wifibmp = image_data_wifi1; break;

@@ -12,7 +12,6 @@ namespace Codingfield {
       void SetTextColor(Color c);
       virtual void SetSelected(bool s) override;
       void SetText(const std::string& t);
-
       void Draw() override;
     private:
       Color backgroundColor = BLACK;

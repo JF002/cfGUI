@@ -7,9 +7,8 @@ WidgetMosaic::WidgetMosaic(Widget* parent, Point position, Size size) : Widget(p
 }
 
 void WidgetMosaic::Draw() {
-  for(Widget* w : children) {
+  for(Widget* w : children)
     w->Draw();
-  }
 }
 
 void WidgetMosaic::AddChild(Widget* widget) {

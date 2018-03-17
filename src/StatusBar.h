@@ -9,7 +9,6 @@ namespace Codingfield {
       enum class WifiStatuses {No_signal, Weak, Medium, Full};
       StatusBar(Widget* parent, Point position, int32_t height) : Bar(parent, position, height) {}
       void Draw() override;
-
       void SetWifiStatus(const WifiStatuses status);
       void SetUptime(const uint32_t t);
       void SetDateTime(const std::string& t);
