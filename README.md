@@ -10,6 +10,9 @@ The following widgets have been created so far:
   - Button
   - Mosaic of widge
   
+![Example picture of cfGUI running on a M5Stack board](https://mastodon.codingfield.com/media/oXYl3M6SVqcpn2iefrs)
+  
+  
 # Todo
   - Remove hard-coded values to make the lib more flexible
   - Add new widgets
