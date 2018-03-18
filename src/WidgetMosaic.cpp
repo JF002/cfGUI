@@ -1,8 +1,10 @@
 #include "WidgetMosaic.h"
-
+#include <String>
 using namespace Codingfield::UI;
 
-WidgetMosaic::WidgetMosaic(Widget* parent, Point position, Size size) : Widget(parent, position, size) {
+WidgetMosaic::WidgetMosaic(Widget* parent, Point position, Size size, int32_t nbColumns, int32_t nbRows) : Widget(parent, position, size),
+                                                                                                           nbColumns {nbColumns},
+                                                                                                           nbRows {nbRows} {
 
 }
 
@@ -13,16 +15,12 @@ void WidgetMosaic::Draw() {
 
 void WidgetMosaic::AddChild(Widget* widget) {
   Widget::AddChild(widget);
-  widget->SetSize(Size(100,88));
-  switch(children.size()) {
-    case 1: widget->SetPosition(Point(5,30)); break;
-    case 2: widget->SetPosition(Point(110,30)); break;
-    case 3: widget->SetPosition(Point(215,30)); break;
-    case 4: widget->SetPosition(Point(5,122)); break;
-    case 5: widget->SetPosition(Point(110,122)); break;
-    case 6: widget->SetPosition(Point(215,122)); break;
-    default: break;
-  }
+
+  Size widgetSize = ComputeWidgetSize();
+  widget->SetSize(widgetSize);
+
+  int32_t position = ((children.size()-1) % (nbRows*nbColumns));
+  widget->SetPosition(ComputeWidgetPosition(widgetSize, position));
 }
 
 void WidgetMosaic::OnButtonAPressed() {
@@ -43,4 +41,25 @@ void WidgetMosaic::OnButtonCPressed() {
     indexSelected++;
     children[indexSelected]->SetSelected(true);
   }
+}
+
+Size WidgetMosaic::ComputeWidgetSize() {
+  Size widgetSize;
+  widgetSize.width = (size.width - ((2*border) + ((nbColumns-1)*border))) / nbColumns;
+  widgetSize.height = (size.height - ((2*border) + ((nbRows-1)*border))) / nbRows;
+
+  String str = String(widgetSize.width) + "x" + String(widgetSize.height);
+  Serial.println("Mosaic size = " + str);
+  return widgetSize;
+}
+
+Point WidgetMosaic::ComputeWidgetPosition(const Size& widgetSize, int32_t position) {
+  Point widgetPosition;
+
+  int32_t row = ((int32_t)position / (int32_t)nbColumns);
+  int32_t column = position % nbColumns;
+  widgetPosition.x = ((column)*border) + (column * widgetSize.width) + this->position.x;
+  widgetPosition.y = ((row)*border) + (row * widgetSize.height) + this->position.y;
+
+  return widgetPosition;
 }
