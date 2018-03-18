@@ -47,9 +47,6 @@ Size WidgetMosaic::ComputeWidgetSize() {
   Size widgetSize;
   widgetSize.width = (size.width - ((2*border) + ((nbColumns-1)*border))) / nbColumns;
   widgetSize.height = (size.height - ((2*border) + ((nbRows-1)*border))) / nbRows;
-
-  String str = String(widgetSize.width) + "x" + String(widgetSize.height);
-  Serial.println("Mosaic size = " + str);
   return widgetSize;
 }
 
