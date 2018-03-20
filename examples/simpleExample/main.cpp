@@ -1,7 +1,7 @@
 #include <M5Stack.h>
 
 #include <Screen.h>
-#include <Bar.h>
+#include <ButtonInfoBar.h>
 #include <StatusBar.h>
 #include <Button.h>
 #include <WidgetMosaic.h>
@@ -9,7 +9,7 @@
 using namespace Codingfield::UI;
 Screen screen(Size(320, 240), BLACK);
 StatusBar* topBar;
-Bar* bottomBar;
+ButtonInfoBar* bottomBar;
 Codingfield::UI::Button* button0; // M5STack should really use namespaces to avoid name clashes
 Codingfield::UI::Button* button1;
 Codingfield::UI::Button* button2;
@@ -23,7 +23,7 @@ void setup() {
   M5.begin();
 
   topBar = new StatusBar(&screen, Point(0,0), 25);
-  bottomBar = new Bar(&screen, Point(0, screen.GetSize().height-25), 25);
+  bottomBar = new ButtonInfoBar(&screen, Point(0, screen.GetSize().height-25), 25);
 
   mosaic = new WidgetMosaic(&screen, Point(5,30), Size(320, 190));
   focus = mosaic;
@@ -32,6 +32,7 @@ void setup() {
   button0->SetBackgroundColor(BLUE);
   button0->SetTextColor(WHITE);
   button0->SetText("16C");
+  button0->SetTitle("Fridge");
   button1 = new Codingfield::UI::Button(mosaic);
   button1->SetBackgroundColor(ORANGE);
   button1->SetTextColor(BLACK);
@@ -55,6 +56,10 @@ void setup() {
 
   topBar->SetUptime(0);
   topBar->SetWifiStatus(StatusBar::WifiStatuses::No_signal);
+
+  bottomBar->SetButtonAText("<");
+  bottomBar->SetButtonBText("Select");
+  bottomBar->SetButtonCText(">");
 
   screen.Draw();
 }
