@@ -34,6 +34,13 @@ void Codingfield::UI::Button::SetText(const std::string& t) {
   }
 }
 
+void Codingfield::UI::Button::SetTitle(const std::string& t) {
+  if(title != t) {
+    title = t;
+    isUpdated = true;
+  }
+}
+
 void Codingfield::UI::Button::Draw() {
   if(isUpdated) {
     M5.Lcd.setTextColor(textColor);
@@ -42,7 +49,12 @@ void Codingfield::UI::Button::Draw() {
     M5.Lcd.fillRect(position.x, position.y, size.width, size.height, backgroundColor);
     M5.Lcd.setTextDatum(MC_DATUM);
     M5.Lcd.setTextColor(textColor);
-    M5.Lcd.drawString(text.c_str(), position.x + (size.width/2), position.y + (size.height/2));
+    if(title.empty())
+      M5.Lcd.drawString(text.c_str(), position.x + (size.width/2), position.y + (size.height/2));
+    else {
+      M5.Lcd.drawString(text.c_str(), position.x + (size.width/2), position.y + (size.height/3));
+      M5.Lcd.drawString(title.c_str(), position.x + (size.width/2), position.y + ((size.height/3)*2));
+    }
 
     if(isSelected) {
       M5.Lcd.drawRect(position.x, position.y, size.width, size.height, RED);

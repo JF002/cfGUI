@@ -12,11 +12,13 @@ namespace Codingfield {
       void SetTextColor(Color c);
       virtual void SetSelected(bool s) override;
       void SetText(const std::string& t);
+      void SetTitle(const std::string& t);
       void Draw() override;
     private:
       Color backgroundColor = BLACK;
       Color textColor = BLACK;
       std::string text;
+      std::string title;
 
     };
   }
