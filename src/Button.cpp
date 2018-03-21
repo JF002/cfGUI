@@ -1,4 +1,5 @@
 #include "Button.h"
+#include "Free_Fonts.h"
 
 using namespace Codingfield::UI;
 
@@ -23,36 +24,41 @@ void Codingfield::UI::Button::SetTextColor(Color c) {
 void Codingfield::UI::Button::SetSelected(bool s) {
   if(isSelected != s) {
     isSelected = s;
-    isUpdated = true;
+    SetUpdateFlag();
   }
 }
 
 void Codingfield::UI::Button::SetText(const std::string& t) {
   if(text != t) {
     this->text = t;
-    isUpdated = true;
+    SetUpdateFlag();
   }
 }
 
 void Codingfield::UI::Button::SetTitle(const std::string& t) {
   if(title != t) {
     title = t;
-    isUpdated = true;
+    SetUpdateFlag();
   }
 }
 
 void Codingfield::UI::Button::Draw() {
+  if(IsHidden()) return;
   if(isUpdated) {
     M5.Lcd.setTextColor(textColor);
-    M5.Lcd.setTextSize(2);
 
     M5.Lcd.fillRect(position.x, position.y, size.width, size.height, backgroundColor);
     M5.Lcd.setTextDatum(MC_DATUM);
     M5.Lcd.setTextColor(textColor);
-    if(title.empty())
+    if(title.empty()) {
+      M5.Lcd.setFreeFont(FF22);
       M5.Lcd.drawString(text.c_str(), position.x + (size.width/2), position.y + (size.height/2));
+      M5.Lcd.setFreeFont(FF21);
+    }
     else {
+      M5.Lcd.setFreeFont(FF22);
       M5.Lcd.drawString(text.c_str(), position.x + (size.width/2), position.y + (size.height/3));
+      M5.Lcd.setFreeFont(FF21);
       M5.Lcd.drawString(title.c_str(), position.x + (size.width/2), position.y + ((size.height/3)*2));
     }
 

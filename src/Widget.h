@@ -12,13 +12,17 @@ namespace Codingfield {
       Widget(Widget* parent);
       Widget(Widget* parent, Point position, Size size);
 
-      Widget(Point position, Size size) : Widget(nullptr, position, size) {}
-
+      void SetParent(Widget* parent) { this->parent = parent; }
       const Size& GetSize() const { return size; }
       void SetSize(const Size& s) { size = s; }
 
       const Point& GetPosition() const {return position; }
       void SetPosition(const Point& p) {position = p; }
+
+      void Show() { SetUpdateFlag(); isVisible = true; }
+      void Hide() { SetUpdateFlag(); isVisible = false; }
+      bool IsVisible() const { return isVisible;}
+      bool IsHidden() const { return !isVisible;}
 
       virtual void AddChild(Widget* widget) { children.push_back(widget); }
 
@@ -39,6 +43,9 @@ namespace Codingfield {
       std::vector<Widget*> children;
       bool isSelected = false;
       bool isUpdated = true;
+      bool isVisible = true;
+
+      void SetUpdateFlag();
     };
 
   }

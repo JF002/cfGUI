@@ -9,8 +9,14 @@ WidgetMosaic::WidgetMosaic(Widget* parent, Point position, Size size, int32_t nb
 }
 
 void WidgetMosaic::Draw() {
+  if(IsHidden()) return;
+  if(isUpdated)
+    M5.Lcd.fillRect(position.x, position.y, size.width, size.height, BLACK);
+
   for(Widget* w : children)
     w->Draw();
+
+  isUpdated = false;
 }
 
 void WidgetMosaic::AddChild(Widget* widget) {
@@ -21,6 +27,7 @@ void WidgetMosaic::AddChild(Widget* widget) {
 
   int32_t position = ((children.size()-1) % (nbRows*nbColumns));
   widget->SetPosition(ComputeWidgetPosition(widgetSize, position));
+  SetUpdateFlag();
 }
 
 void WidgetMosaic::OnButtonAPressed() {

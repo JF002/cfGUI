@@ -24,12 +24,12 @@ void ButtonInfoBar::SetButtonCText(const std::string& t) {
 }
 
 void ButtonInfoBar::Draw() {
+  if(IsHidden()) return;
   bool oldIsUpdated = isUpdated;
   Bar::Draw();
 
   if(oldIsUpdated) {
     M5.Lcd.setTextColor(BLACK);
-    M5.Lcd.setTextSize(2);
 
     M5.Lcd.setTextDatum(TC_DATUM);
     M5.Lcd.drawString(btnAText.c_str(), (size.width/6), position.y + 5);
