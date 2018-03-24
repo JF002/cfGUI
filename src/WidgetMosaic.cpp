@@ -51,6 +51,9 @@ void WidgetMosaic::ZoomOnSelected(bool enabled) {
     Size widgetSize = ComputeWidgetSize(1,1);
     selectedWidget->SetSize(widgetSize);
     selectedWidget->SetPosition(ComputeWidgetPosition(widgetSize, 0));
+    if(selectedWidget->IsEditable()) {
+      selectedWidget->EnableControls();
+    }
   }  else {
     zoomOnSelected = false;
 
@@ -59,11 +62,16 @@ void WidgetMosaic::ZoomOnSelected(bool enabled) {
       Size widgetSize = ComputeWidgetSize();
       widget->SetSize(widgetSize);
       widget->SetPosition(ComputeWidgetPosition(widgetSize, index));
+      if(selectedWidget->IsEditable()) {
+        selectedWidget->DisableControls();
+      }
     }
   }
 
-  if(oldValue != zoomOnSelected)
+  if(oldValue != zoomOnSelected) {
+    zoomOnSelectedCallback(selectedWidget, zoomOnSelected);
     SetUpdateFlag();
+  }
 }
 
 void WidgetMosaic::OnButtonAPressed() {
@@ -121,4 +129,12 @@ Point WidgetMosaic::ComputeWidgetPosition(const Size& widgetSize, int32_t positi
   widgetPosition.y = ((row)*border) + (row * widgetSize.height) + this->position.y;
 
   return widgetPosition;
+}
+
+bool WidgetMosaic::IsZoomOnSelected() const {
+  return zoomOnSelected;
+}
+
+void WidgetMosaic::SetZoomOnSelectedCallback(std::function<void (Widget* widget, bool)>func) {
+  zoomOnSelectedCallback = func;
 }

@@ -14,7 +14,7 @@ namespace Codingfield {
       void SetText(const std::string& t);
       void SetTitle(const std::string& t);
       void Draw() override;
-    private:
+    protected:
       Color backgroundColor = BLACK;
       Color textColor = BLACK;
       std::string text;

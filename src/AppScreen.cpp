@@ -37,3 +37,23 @@ AppScreen::AppScreen(Size size, Color color, Bar* topBar, Bar* bottomBar, Widget
     AddChild(centreWidget);
   }
 }
+
+void AppScreen::OnButtonAPressed() {
+  if(centreWidget != nullptr)
+    centreWidget->OnButtonAPressed();
+}
+
+void AppScreen::OnButtonBPressed() {
+  if(centreWidget != nullptr)
+    centreWidget->OnButtonBPressed();
+}
+
+void AppScreen::OnButtonBLongPush() {
+  if(centreWidget != nullptr)
+    centreWidget->OnButtonBLongPush();
+}
+
+void AppScreen::OnButtonCPressed() {
+  if(centreWidget != nullptr)
+    centreWidget->OnButtonCPressed();
+}

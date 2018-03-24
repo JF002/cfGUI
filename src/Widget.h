@@ -23,6 +23,9 @@ namespace Codingfield {
       void Hide() { SetUpdateFlag(); isVisible = false; }
       bool IsVisible() const { return isVisible;}
       bool IsHidden() const { return !isVisible;}
+      bool IsEditable() const { return isEditable; }
+      bool ContainsValue() const { return containsValue; }
+
 
       virtual void AddChild(Widget* widget) { children.push_back(widget); }
 
@@ -36,8 +39,10 @@ namespace Codingfield {
       virtual void OnButtonBLongPush() { }
       virtual void OnButtonCPressed() { }
 
-      virtual void SetSelected(bool s) {
-      }
+      virtual void SetSelected(bool s) { }
+      virtual void EnableControls() {}
+      virtual void DisableControls() {}
+
 
     protected:
       Point position;
@@ -47,6 +52,8 @@ namespace Codingfield {
       bool isSelected = false;
       bool isUpdated = true;
       bool isVisible = true;
+      bool isEditable = false;
+      bool containsValue = false;
 
       void SetUpdateFlag();
     };

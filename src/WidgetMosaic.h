@@ -16,6 +16,8 @@ namespace Codingfield {
       virtual void OnButtonBLongPush() override;
       virtual void OnButtonCPressed() override;
       const Widget* GetSelected() const;
+      bool IsZoomOnSelected() const;
+      void SetZoomOnSelectedCallback(std::function<void (Widget* widget, bool)> func);
     private:
       int32_t indexSelected = 0;
       int32_t border = 5;
@@ -28,6 +30,7 @@ namespace Codingfield {
       Widget* selectedWidget = nullptr;
       bool zoomOnSelected = false;
       void ZoomOnSelected(bool enabled);
+      std::function<void (Widget* widget, bool)> zoomOnSelectedCallback = nullptr;
     };
   }
 }
