@@ -4,7 +4,6 @@
 using namespace Codingfield::UI;
 
 Widget::Widget(Widget* parent) : Widget(parent, Point(0,0), Size(0,0)) {
-
 }
 
 Widget::Widget(Widget* parent, Point position, Size size) :  parent{parent}, position{position}, size {size} {
@@ -17,4 +16,14 @@ void Widget::SetUpdateFlag() {
     c->SetUpdateFlag();
   }
   isUpdated = true;
+}
+
+void Widget::SetSize(const Size& s) {
+  size = s;
+  OnSizeUpdated();
+}
+
+void Widget::SetPosition(const Point& p) {
+  position = p;
+  OnPositionUpdated();
 }

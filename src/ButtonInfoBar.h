@@ -6,6 +6,7 @@ namespace Codingfield {
   namespace UI {
     class ButtonInfoBar : public Bar {
     public:
+      ButtonInfoBar() : Bar() {}
       ButtonInfoBar(Widget* parent, Point position, int32_t height) : Bar(parent, position, height) {}
       void Draw() override;
       void SetButtonAText(const std::string& t);

@@ -14,10 +14,10 @@ namespace Codingfield {
 
       void SetParent(Widget* parent) { this->parent = parent; }
       const Size& GetSize() const { return size; }
-      void SetSize(const Size& s) { size = s; }
+      void SetSize(const Size& s);
 
       const Point& GetPosition() const {return position; }
-      void SetPosition(const Point& p) {position = p; }
+      void SetPosition(const Point& p);
 
       void Show() { SetUpdateFlag(); isVisible = true; }
       void Hide() { SetUpdateFlag(); isVisible = false; }
@@ -28,13 +28,16 @@ namespace Codingfield {
 
       virtual void Draw() = 0;
 
+      virtual void OnSizeUpdated() { }
+      virtual void OnPositionUpdated() { }
+
       virtual void OnButtonAPressed() { }
-
       virtual void OnButtonBPressed() { }
-
+      virtual void OnButtonBLongPush() { }
       virtual void OnButtonCPressed() { }
 
-      virtual void SetSelected(bool s) { }
+      virtual void SetSelected(bool s) {
+      }
 
     protected:
       Point position;
