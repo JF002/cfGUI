@@ -87,13 +87,18 @@ void WidgetMosaic::OnButtonAPressed() {
 }
 
 void WidgetMosaic::OnButtonBPressed() {
-  if(zoomOnSelected)
-    return selectedWidget->OnButtonBPressed();
+  if(zoomOnSelected) {
+    ZoomOnSelected(false);
+    selectedWidget->OnButtonBPressed();
+    return;
+  }
 
   ZoomOnSelected(true);
 }
 
 void WidgetMosaic::OnButtonBLongPush() {
+  if(zoomOnSelected)
+    selectedWidget->OnButtonBLongPush();
   ZoomOnSelected(false);
 }
 
