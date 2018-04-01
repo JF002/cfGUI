@@ -14,7 +14,7 @@ The following widgets have been created so far:
   - Button, UpDownButton
   - Mosaic of widgets
   
-![Example picture of cfGUI running on a M5Stack board](https://mastodon.codingfield.com/media/oXYl3M6SVqcpn2iefrs)
+![Example picture of cfGUI running on a M5Stack board](https://mastodon.codingfield.com/system/media_attachments/files/000/207/740/original/dbacf24f45561e5c.jpg)
 
 # How To (Platform.io)
 To use this library with your platform.io project, simply clone or download the library into the directory 'lib' of your project.
