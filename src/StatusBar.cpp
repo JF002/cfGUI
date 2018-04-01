@@ -10,31 +10,31 @@ extern const uint8_t image_data_wifi3[];
 void StatusBar::SetWifiStatus(const StatusBar::WifiStatuses status) {
   if(wifiStatus != status) {
     wifiStatus = status;
-    isUpdated = true;
+    SetUpdateFlag();
   }
 }
 
 void StatusBar::SetUptime(const uint32_t t) {
   if(uptime != t) {
     uptime = t;
-    isUpdated = true;
+    SetUpdateFlag();
   }
 }
 
 void StatusBar::SetDateTime(const std::string& t) {
   if(dateTime != t) {
     dateTime = t;
-    isUpdated = true;
+    SetUpdateFlag();
   }
 }
 
 void StatusBar::Draw() {
+  if(IsHidden()) return;
   bool oldIsUpdated = isUpdated;
   Bar::Draw();
 
   if(oldIsUpdated) {
     M5.Lcd.setTextColor(BLACK);
-    M5.Lcd.setTextSize(2);
 
     M5.Lcd.setTextDatum(TL_DATUM);
     String s = String("UP:") + String(uptime) + String("h");
