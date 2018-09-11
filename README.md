@@ -21,6 +21,19 @@ To use this library with your platform.io project, simply clone or download the 
 Then, you just need to include the headers (e.g. #include <Screen.h>) and write some code.
 
 Look at examples if you need some inspiration ;-)
+
+**NOTE : ** This project was built with version 0.1.9 of M5STack. Since then, a little change has been made on method DrawBitmap which is not compatible with this version of cfGUI. Until I write a fix, you should use version 0.1.9 of M5Stack.
+
+Here is an example of `platform.ini` file:
+
+```
+[env:m5stack-core-esp32]
+platform = espressif32
+board = m5stack-core-esp32
+framework = arduino
+lib_deps=M5Stack@0.1.9, NTPClient
+build_flags=-std=gnu++11
+```
   
 # Todo
   - <s>Remove hard-coded values to make the lib more flexible</s>
