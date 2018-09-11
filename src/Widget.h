@@ -1,7 +1,10 @@
 #pragma once
 
+#include <vector>
+
 #include "Point.h"
 #include "Size.h"
+
 #include <M5Stack.h>
 
 namespace Codingfield {
