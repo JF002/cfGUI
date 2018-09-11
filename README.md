@@ -24,7 +24,7 @@ Look at examples if you need some inspiration ;-)
 
 **NOTE : ** This project was built with version 0.1.9 of M5STack. Since then, a little change has been made on method DrawBitmap which is not compatible with this version of cfGUI. Until I write a fix, you should use version 0.1.9 of M5Stack.
 
-Here is an example of `platform.ini` file:
+Here is an example of `platformio.ini` file:
 
 ```
 [env:m5stack-core-esp32]
