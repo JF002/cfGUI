@@ -11,11 +11,11 @@ Widget::Widget(Widget* parent, Point position, Size size) :  parent{parent}, pos
     parent->AddChild(this);
 }
 
-void Widget::SetUpdateFlag() {
+void Widget::Invalidate() {
   for(auto c : children) {
-    c->SetUpdateFlag();
+    c->Invalidate();
   }
-  isUpdated = true;
+  isInvalidated = true;
 }
 
 void Widget::SetSize(const Size& s) {

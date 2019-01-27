@@ -13,19 +13,14 @@ WidgetMosaic::WidgetMosaic(int32_t nbColumns, int32_t nbRows) : WidgetMosaic(nul
 
 void WidgetMosaic::Draw() {
   if(IsHidden()) return;
-  if(isUpdated) {
+  if(isInvalidated) {
     M5.Lcd.fillRect(position.x, position.y, size.width, size.height, BLACK);
   }
 
-  if(!zoomOnSelected) {
-    for(Widget* w : children)
-      w->Draw();
-  }
-  else {
-    selectedWidget->Draw();
-  }
+  for(Widget* w : children)
+    w->Draw();
 
-  isUpdated = false;
+  isInvalidated = false;
 }
 
 void WidgetMosaic::AddChild(Widget* widget) {
@@ -36,7 +31,7 @@ void WidgetMosaic::AddChild(Widget* widget) {
 
   int32_t position = ((children.size()-1) % (nbRows*nbColumns));
   widget->SetPosition(ComputeWidgetPosition(widgetSize, position));
-  SetUpdateFlag();
+  Invalidate();
 }
 
 const Widget* WidgetMosaic::GetSelected() const {
@@ -46,10 +41,15 @@ const Widget* WidgetMosaic::GetSelected() const {
 void WidgetMosaic::ZoomOnSelected(bool enabled) {
   bool oldValue = zoomOnSelected;
   if(selectedWidget != nullptr && enabled) {
+    for(auto* w : children)
+      w->Hide();
+
     zoomOnSelected = true;
     Size widgetSize = ComputeWidgetSize(1,1);
     selectedWidget->SetSize(widgetSize);
     selectedWidget->SetPosition(ComputeWidgetPosition(widgetSize, 0));
+    selectedWidget->Show();
+    selectedWidget->Invalidate();
     if(selectedWidget->IsEditable()) {
       selectedWidget->EnableControls();
     }
@@ -61,6 +61,7 @@ void WidgetMosaic::ZoomOnSelected(bool enabled) {
       Size widgetSize = ComputeWidgetSize();
       widget->SetSize(widgetSize);
       widget->SetPosition(ComputeWidgetPosition(widgetSize, index));
+      widget->Show();
       if(selectedWidget->IsEditable()) {
         selectedWidget->DisableControls();
       }
@@ -69,7 +70,7 @@ void WidgetMosaic::ZoomOnSelected(bool enabled) {
 
   if(oldValue != zoomOnSelected) {
     zoomOnSelectedCallback(selectedWidget, zoomOnSelected);
-    SetUpdateFlag();
+    Invalidate();
   }
 }
 

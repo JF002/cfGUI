@@ -26,7 +26,6 @@ void Codingfield::UI::Button::SetSelected(bool s) {
   if(isSelected != s) {
     wasSelected = isSelected;
     isSelected = s;
-    SetUpdateFlag();
   }
 }
 
@@ -37,7 +36,6 @@ void Codingfield::UI::Button::SetText(const std::string& t) {
     else
       this->oldText = this->text;
     this->text = t;
-    SetUpdateFlag();
   }
 }
 
@@ -48,14 +46,19 @@ void Codingfield::UI::Button::SetTitle(const std::string& t) {
     else
       oldTitle = title;
     title = t;
-    SetUpdateFlag();
   }
 }
 
 void Codingfield::UI::Button::Draw() {
-  if(IsHidden()) return;
+  if(IsHidden()){
+    return;
+  }
   if(true) {
-    bool forceUpdate = false;
+    bool forceUpdate = isInvalidated;
+    if(forceUpdate) {
+      Serial.println("FORCEUPDATE");
+
+    }
     int x = position.x + (size.width/2);
     int yText;
     int yTitle;
@@ -66,7 +69,7 @@ void Codingfield::UI::Button::Draw() {
       yTitle = position.y + ((size.height/3)*2);
     }
 
-    if(backgroundColorUpdated) {
+    if(backgroundColorUpdated || forceUpdate) {
       M5.Lcd.fillRect(position.x, position.y, size.width, size.height, backgroundColor);
       backgroundColorUpdated = false;
       forceUpdate = true;
@@ -96,7 +99,7 @@ void Codingfield::UI::Button::Draw() {
       oldTitle = title;
     }
 
-    if(wasSelected != isSelected) {
+    if(forceUpdate || (wasSelected != isSelected)) {
       if(isSelected) {
         M5.Lcd.drawRect(position.x, position.y, size.width, size.height, RED);
         M5.Lcd.drawRect(position.x+1, position.y+1, size.width-2, size.height-2, RED);
@@ -108,5 +111,5 @@ void Codingfield::UI::Button::Draw() {
       }
     }
   }
-  isUpdated = false;
+  isInvalidated = false;
 }
