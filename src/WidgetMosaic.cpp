@@ -1,5 +1,4 @@
 #include "WidgetMosaic.h"
-#include <String>
 using namespace Codingfield::UI;
 
 WidgetMosaic::WidgetMosaic(Widget* parent, Point position, Size size, int32_t nbColumns, int32_t nbRows) : Widget(parent, position, size),
