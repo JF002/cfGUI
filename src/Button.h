@@ -16,10 +16,13 @@ namespace Codingfield {
       void Draw() override;
     protected:
       Color backgroundColor = BLACK;
+      bool backgroundColorUpdated = true;
       Color textColor = BLACK;
       std::string text;
+      std::string oldText;
       std::string title;
-
+      std::string oldTitle;
+      bool wasSelected = false;
     };
   }
 }
