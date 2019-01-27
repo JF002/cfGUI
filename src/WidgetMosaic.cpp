@@ -68,7 +68,7 @@ void WidgetMosaic::ZoomOnSelected(bool enabled) {
     }
   }
 
-  if(oldValue != zoomOnSelected) {
+  if(selectedWidget != nullptr && oldValue != zoomOnSelected) {
     zoomOnSelectedCallback(selectedWidget, zoomOnSelected);
     Invalidate();
   }
@@ -87,6 +87,7 @@ void WidgetMosaic::OnButtonAPressed() {
 }
 
 void WidgetMosaic::OnButtonBPressed() {
+  if(selectedWidget == nullptr) return;
   if(zoomOnSelected) {
     ZoomOnSelected(false);
     selectedWidget->OnButtonBPressed();
