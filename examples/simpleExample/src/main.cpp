@@ -1,6 +1,5 @@
 #include <M5Stack.h>
 
-#include <NTPClient.h>
 #include <Screen.h>
 #include <ButtonInfoBar.h>
 #include <StatusBar.h>
