@@ -8,11 +8,11 @@ void Screen::Draw() {
   M5.Lcd.setTextSize(1);
 
   if(IsHidden()) return;
-  if(isUpdated)
+  if(isInvalidated)
     M5.Lcd.fillScreen(color);
 
   for(Widget* w : children)
     w->Draw();
 
-  isUpdated = false;
+  isInvalidated = false;
 }
