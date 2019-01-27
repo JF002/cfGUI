@@ -1,7 +1,10 @@
 #pragma once
 
+#include <vector>
+
 #include "Point.h"
 #include "Size.h"
+
 #include <M5Stack.h>
 
 namespace Codingfield {
@@ -25,10 +28,20 @@ namespace Codingfield {
       void SetPosition(const Point& p);
 
       /* The widget will be visible (drawn) the next time Draw() will be called */
-      void Show() { SetUpdateFlag(); isVisible = true; }
+      void Show() {
+        if (!isVisible) {
+          Invalidate();
+          isVisible = true;
+        }
+      }
 
       /* The widget will not be visible (not drawn) the next time Draw() will be called */
-      void Hide() { SetUpdateFlag(); isVisible = false; }
+      void Hide() {
+        if (isVisible) {
+          Invalidate();
+          isVisible = false;
+        }
+      }
 
       bool IsVisible() const { return isVisible;}
       bool IsHidden() const { return !isVisible;}
@@ -57,20 +70,20 @@ namespace Codingfield {
       /* Enables/disables controls on the button */
       virtual void EnableControls() {}
       virtual void DisableControls() {}
+      void Invalidate();
 
     protected:
       virtual void OnSizeUpdated() { }
       virtual void OnPositionUpdated() { }
-      void SetUpdateFlag();
 
       Point position;
       Size size;
       Widget* parent = nullptr;
       std::vector<Widget*> children;
       bool isSelected = false;
-      bool isUpdated = true;
       bool isVisible = true;
       bool isEditable = false;
+      bool isInvalidated = true;
     };
   }
 }

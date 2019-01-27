@@ -9,8 +9,10 @@ UpDownButton::UpDownButton(Widget* parent) : Button(parent) {
 void UpDownButton::Draw() {
   if(IsHidden()) return;
 
-  if(isUpdated) {
-    Button::Draw();
+  bool wasInvalidated = isInvalidated;
+  Button::Draw();
+
+  if(wasInvalidated) {
     if(controlsEnabled) {
       M5.Lcd.setTextDatum(MC_DATUM);
       M5.Lcd.setTextColor(textColor);
@@ -18,8 +20,6 @@ void UpDownButton::Draw() {
       M5.Lcd.drawString("+", position.x + (size.width - (size.width/6)), position.y + (size.height/2));
     }
   }
-
-  isUpdated = false;
 }
 
 void UpDownButton::EnableControls()  {
@@ -32,29 +32,25 @@ void UpDownButton::DisableControls() {
 
 void UpDownButton::OnButtonAPressed() {
   if(upCallback != nullptr) {
-    if(downCallback(this))
-      SetUpdateFlag();
+    downCallback(this);
   }
 }
 
 void UpDownButton::OnButtonBPressed() {
   if(applyCallback != nullptr) {
-    if(applyCallback(this))
-      SetUpdateFlag();
+    applyCallback(this);
   }
 }
 
 void UpDownButton::OnButtonBLongPush() {
   if(cancelCallback != nullptr) {
-    if(cancelCallback(this))
-      SetUpdateFlag();
+    cancelCallback(this);
   }
 }
 
 void UpDownButton::OnButtonCPressed() {
   if(upCallback != nullptr) {
-    if(upCallback(this))
-      SetUpdateFlag();
+    upCallback(this);
   }
 }
 

@@ -1,6 +1,5 @@
 #include <M5Stack.h>
 
-#include <NTPClient.h>
 #include <Screen.h>
 #include <ButtonInfoBar.h>
 #include <StatusBar.h>
@@ -11,6 +10,8 @@
 #include <sys/time.h>
 #include <AppScreen.h>
 #include <UpDownButton.h>
+#include <WiFi.h>
+
 
 using namespace Codingfield::UI;
 AppScreen* screen;

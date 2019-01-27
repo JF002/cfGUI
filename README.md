@@ -22,8 +22,6 @@ Then, you just need to include the headers (e.g. #include <Screen.h>) and write 
 
 Look at examples if you need some inspiration ;-)
 
-**NOTE : ** This project was built with version 0.1.9 of M5STack. Since then, a little change has been made on method DrawBitmap which is not compatible with this version of cfGUI. Until I write a fix, you should use version 0.1.9 of M5Stack.
-
 Here is an example of `platformio.ini` file:
 
 ```
@@ -31,7 +29,7 @@ Here is an example of `platformio.ini` file:
 platform = espressif32
 board = m5stack-core-esp32
 framework = arduino
-lib_deps=M5Stack@0.1.9, NTPClient
+lib_deps=M5Stack, NTPClient
 build_flags=-std=gnu++11
 ```
   
@@ -41,6 +39,11 @@ build_flags=-std=gnu++11
   - Better 'focus' management
   
 # Changelog
+## 0.3.0
+  - New redraw() strategy (replace SetUpdatedFlag() by Invalidate(), performances improved and flickering reduced
+  - Support new version of M5Stack lib
+  - Fix crash when the center button was pushed with no widget selected
+
 ## 0.2.0
   - Change default font (looks better)
   - New widgets (AppScreen, StatusBar, ButtonInfoBar, UpDownButton)
