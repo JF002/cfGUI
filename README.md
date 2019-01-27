@@ -39,6 +39,11 @@ build_flags=-std=gnu++11
   - Better 'focus' management
   
 # Changelog
+## 0.3.0
+  - New redraw() strategy (replace SetUpdatedFlag() by Invalidate(), performances improved and flickering reduced
+  - Support new version of M5Stack lib
+  - Fix crash when the center button was pushed with no widget selected
+
 ## 0.2.0
   - Change default font (looks better)
   - New widgets (AppScreen, StatusBar, ButtonInfoBar, UpDownButton)
