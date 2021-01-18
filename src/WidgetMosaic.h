@@ -21,8 +21,8 @@ namespace Codingfield {
     private:
       int32_t indexSelected = 0;
       int32_t border = 5;
-      int32_t nbRows;
       int32_t nbColumns;
+      int32_t nbRows;
 
       Size ComputeWidgetSize();
       Size ComputeWidgetSize(int32_t nbColumns, int32_t nbRows);

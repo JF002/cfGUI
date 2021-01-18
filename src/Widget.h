@@ -76,9 +76,9 @@ namespace Codingfield {
       virtual void OnSizeUpdated() { }
       virtual void OnPositionUpdated() { }
 
+      Widget* parent = nullptr;
       Point position;
       Size size;
-      Widget* parent = nullptr;
       std::vector<Widget*> children;
       bool isSelected = false;
       bool isVisible = true;
